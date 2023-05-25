@@ -17,6 +17,7 @@
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "mongoose": "^7.2.0",
+    "mongoose-unique-validator": "^4.0.0",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",

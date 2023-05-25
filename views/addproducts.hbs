@@ -1,0 +1,81 @@
+ {{>navbar}}
+ {{>sidebar}}
+ <div class="page-wrapper">
+     <div class="content">
+         <div class="page-header">
+             <div class="page-title">
+                 <h4>Product Add</h4>
+                 <h6>Create new product</h6>
+             </div>
+         </div>
+         <div class="card">
+             <div class="card-body">
+                 <div class="row">
+                     <form action="/home/addproduct" method="post">
+                     <div class="col-12">
+                         <div class="form-group">
+                             <label>Product Name</label>
+                             <input type="text" name="product">
+                         </div>
+                     </div>
+                     <div class="col-12">
+                         <div class="form-group">
+                             <label>Category</label>
+                             <select class="select" name="category">
+                                 <option  name="" value="" disabled selected>Escoge una categoria</option>
+                                    {{#each category}}
+                                 <option value="{{this.category}}">{{this.category}}</option>
+                                  {{/each}}
+                             </select>
+                         </div>
+                     </div>
+
+                     <div class="col-12">
+                         <div class="form-group">
+                             <label>Brand</label>
+                             <select class="select" name="brand">
+                                 <option disabled selected>Choose Brand</option>
+                                 {{#each brands}}
+                                 <option value="{{this.brand}}">{{this.brand}}</option>
+                                 {{/each}}
+                             </select>
+                         </div>
+                     </div>
+                     <div class="col-12">
+                         <div class="form-group">
+                             <label>SKU</label>
+                             <input name="SKU" type="text">
+                         </div>
+                     </div>
+
+                     <div class="col-lg-12">
+                         <div class="form-group">
+                             <label>Description</label>
+                             <textarea class="form-control" name="description"></textarea>
+                         </div>
+                     </div>
+                        <div class="col-12">
+                         <div class="form-group">
+                             <label>Quantity</label>
+                             <input type="text" name="quantity">
+                         </div>
+                     </div>
+                                          <div class="col-12">
+                         <div class="form-group">
+                             <label>Price</label>
+                             <input type="text" name="price">
+                         </div>
+                     </div>
+
+                     <div class="col-lg-12">
+                         <button href="javascript:void(0);" class="btn btn-submit me-2" type="submit">Guardar</button>
+                         <button href="/home/productlist" class="btn btn-cancel">Cancelar</button>
+                     </div>
+                     </form>
+                 </div>
+             </div>
+         </div>
+        
+     </div>
+ </div>
+ </div>

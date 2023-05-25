@@ -9,7 +9,7 @@ var session = require("express-session");
 var flash = require("connect-flash");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var homeRouter = require('./routes/home');
 
 //Initializations
 var app = express();
@@ -37,12 +37,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req,res,next)=>{
-  app.locals.signupMessage = req.flash('signupMessage');
-  app.locals.signinMessage = req.flash('signinMessage');
+  app.locals.successMessage = req.flash('successMessage');
+  app.locals.failureMessage = req.flash('failureMessage');
   next();
 })
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/home', homeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -32,7 +32,7 @@ passport.use('local-signup', new LocalStrategy(
         .then(async function(user) {
 
         if (user) {
-          return done(null, false, req.flash('signupMessage',"El email ya existe"));
+          return done(null, false, req.flash('failureMessage',"El email ya existe"));
 
         } else {
             let hashPassword = generateHash(password);
@@ -60,10 +60,10 @@ passport.use('local-signup', new LocalStrategy(
       
       let user = await Users.findOne({email: email});
       if(!user){
-        return done(null,false, req.flash("signinMessage","El usuario no existe"))
+        return done(null,false, req.flash("failureMessage","El usuario no existe"))
       }
       if(!user.comparePassword(password)){
-      return done(null,false, req.flash("signinMessage","Contraseña incorrecta"))
+      return done(null,false, req.flash("failureMessage","Contraseña incorrecta"))
     }
     done(null,user)
   

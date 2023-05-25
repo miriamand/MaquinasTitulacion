@@ -4,11 +4,14 @@ const {Schema} = mongoose;
 
 const userSchema = new Schema({
     fullname: String,
-    email: String,
+    email: {
+      type: String,
+      unique: true // `email` must be unique
+    },
     password: String
 })
 
-userSchema.methods.encryptPassword = (password) => {
+userSchema.methods.encryptPassword = function(password) {
    return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
 };
 
