@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const passport = require('passport')
+const Product = require("../db/models/products")
 
 // Define the routes
 router.get('/', (req, res) => {
@@ -39,32 +40,18 @@ res.redirect('/')
 }
 
 
-router.get('/home',isAuthenticated, (req, res) => {
-  res.render('index');
+router.get('/home',isAuthenticated, async(req, res) => {
+ try {
+    let registros = await Product.find().exec();
+    res.render("index",{prods:registros})
+    console.log(registros); // puede tener registros o un array vacío
+}
+catch(e) {
+    console.error(e);
+}
 });
 
 
-// router.get('/home/brandlist',isAuthenticated, (req, res) => {
-//   res.render('brandlist');
-// });
-
-
-
-// router.get('/addproduct', function(req, res, next) {
-//   res.render("add-products");
-// });
-
-router.post('/add', (req, res) => {
-  const { brand, model, quantity } = req.body;
-  const id = inventory.length + 1;
-  inventory.push({ id, brand, model, quantity });
-  res.redirect('/');
-});
-
-//router.use((req,res,next)=>{
-//   isAuthenticated(req,res,next);
-//   next();
-// })
 
 
 module.exports = router;

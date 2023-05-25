@@ -7,6 +7,12 @@
                  <h4>Product Add</h4>
                  <h6>Create new product</h6>
              </div>
+              {{#if failureMessage}}
+                <div class="alert alert-danger">{{failureMessage}}</div>
+            {{/if}}
+            {{#if successMessage}}
+                <div class="alert alert-success">{{successMessage}}</div>
+            {{/if}}
          </div>
          <div class="card">
              <div class="card-body">
@@ -69,7 +75,7 @@
 
                      <div class="col-lg-12">
                          <button href="javascript:void(0);" class="btn btn-submit me-2" type="submit">Guardar</button>
-                         <button href="/home/productlist" class="btn btn-cancel">Cancelar</button>
+                         <a href="/home/productlist" class="btn btn-cancel">Cancelar</a>
                      </div>
                      </form>
                  </div>

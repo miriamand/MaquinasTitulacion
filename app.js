@@ -13,7 +13,7 @@ var homeRouter = require('./routes/home');
 
 //Initializations
 var app = express();
-require('./database')
+require('./db/database')
 require("./passport/local-auth")
 
 // view engine setup

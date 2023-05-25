@@ -94,52 +94,21 @@
                                         <table class="table datatable ">
                                             <thead>
                                                 <tr>
-                                                    <th>Sno</th>
-                                                    <th>Products</th>
-                                                    <th>Price</th>
+                                                    <th>SKU</th>
+                                                    <th>Productos</th>
+                                                    <th>Precio</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {{#each prods}}
                                                 <tr>
-                                                    <td>1</td>
+                                                    <td>{{this.SKU}}</td>
                                                     <td class="productimgname">
-                                                        <a href="/productlist" class="product-img">
-                                                            <img src="/img/product/product22.jpg" alt="product">
-                                                        </a>
-                                                        <a href="/productlist">Apple Earpods</a>
+                                                        <a href="/home/productlist">{{this.product}}</a>
                                                     </td>
-                                                    <td>$891.2</td>
+                                                    <td>{{this.price}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td class="productimgname">
-                                                        <a href="/productlist" class="product-img">
-                                                            <img src="/img/product/product23.jpg" alt="product">
-                                                        </a>
-                                                        <a href="/productlist">iPhone 11</a>
-                                                    </td>
-                                                    <td>$668.51</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td class="productimgname">
-                                                        <a href="/productlist" class="product-img">
-                                                            <img src="/img/product/product24.jpg" alt="product">
-                                                        </a>
-                                                        <a href="/productlist">samsung</a>
-                                                    </td>
-                                                    <td>$522.29</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td class="productimgname">
-                                                        <a href="/productlist" class="product-img">
-                                                            <img src="/img/product/product6.jpg" alt="product">
-                                                        </a>
-                                                        <a href="/productlist">Macbook Pro</a>
-                                                    </td>
-                                                    <td>$291.01</td>
-                                                </tr>
+                                                 {{/each}}
                                             </tbody>
                                         </table>
                                     </div>

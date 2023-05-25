@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const Brands = require("../models/brands")
-const Category = require("../models/category")
-const Product = require("../models/products")
+const Brands = require("../db/models/brands")
+const Category = require("../db/models/category")
+const Product = require("../db/models/products")
 
 function isAuthenticated(req,res,next){
   if(req.isAuthenticated()){
@@ -58,12 +58,12 @@ router.post('/addproduct',isAuthenticated, function(req, res, next){
 
 /* GET */
 router.get('/addbrand',isAuthenticated, (req, res) => {
-  res.render('addbrand');
+  res.render('./adds/addbrand');
 });
 router.get('/brandlist',isAuthenticated, async(req, res) => {
   try {
     let registros = await Brands.find().exec();
-    res.render("brandlist",{brands:registros})
+    res.render("./lists/brandlist",{brands:registros})
     console.log(registros); // puede tener registros o un array vacío
 }
 catch(e) {
@@ -74,14 +74,14 @@ router.get('/addproduct', async(req, res, next) => {
   let registroC = await Category.find().exec();
   let registroB = await Brands.find().exec();
 
-  res.render("addproducts",{category:registroC,brands:registroB});
+  res.render("./adds/addproducts",{category:registroC,brands:registroB});
 });
 router.get('/productlist',isAuthenticated, async(req, res) => {
   try {
 
     let registroP = await Product.find().exec();
 
-    res.render("productlist",{prods:registroP})
+    res.render("./lists/productlist",{prods:registroP})
     console.log(registroP); // puede tener registros o un array vacío
 }
 catch(e) {
@@ -90,12 +90,12 @@ catch(e) {
 }
 });
 router.get('/addcategory',isAuthenticated, (req, res) => {
-  res.render('addcategory');
+  res.render('./adds/addcategory');
 });
 router.get('/categorylist',isAuthenticated, async(req, res) => {
   try {
     let registros = await Category.find().exec();
-    res.render("categorylist",{category:registros})
+    res.render("./lists/categorylist",{category:registros})
     console.log(registros); // puede tener registros o un array vacío
 }
 catch(e) {
