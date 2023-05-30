@@ -6,8 +6,8 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Brand ADD</h4>
-                <h6>Create new Brand</h6>
+                <h4>Añade Marca</h4>
+                <h6>Registra una nueva marca</h6>
             </div>
             {{#if failureMessage}}
                 <div class="alert alert-danger">{{failureMessage}}</div>
@@ -22,24 +22,24 @@
                     <form action="/home/addbrand" method="post">
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="form-group">
-                            <label>Brand Name</label>
-                            <input name="brand" type="text">
+                            <label>Marca</label>
+                            <input name="brand" type="text" required>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label>Description</label>
-                            <textarea name="description" class="form-control"></textarea>
+                            <label>Descripcion</label>
+                            <textarea name="description" class="form-control" required></textarea>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label> Product Image</label>
+                            <label>Imagen</label>
                             <div class="image-upload">
-                                <input type="file" name="brandImg">
+                                <input type="file" name="brandImg" required>
                                 <div class="image-uploads">
                                     <img src="/img/icons/upload.svg" alt="img">
-                                    <h4>Drag and drop a file to upload</h4>
+                                    <h4>Selecciona una imagen</h4>
                                 </div>
                             </div>
                         </div>

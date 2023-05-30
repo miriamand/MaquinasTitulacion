@@ -1,18 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var hbs = require('hbs');
-var passport = require("passport");
-var session = require("express-session");
-var flash = require("connect-flash");
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const hbs = require('hbs');
+const passport = require("passport");
+const session = require("express-session");
+const flash = require("connect-flash");
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 
-var indexRouter = require('./routes/index');
-var homeRouter = require('./routes/home');
+
+const indexRouter = require('./routes/index');
+const homeRouter = require('./routes/home');
 
 //Initializations
-var app = express();
+const app = express();
 require('./db/database')
 require("./passport/local-auth")
 
@@ -20,6 +23,7 @@ require("./passport/local-auth")
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
+require("./helpers/helpers")
 
 //Middleware
 app.use(logger('dev'));
@@ -27,6 +31,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+const storage = multer.diskStorage({
+  destination: path.join(__dirname,'public/img/uploads'),
+  filename:(req,file,cb,filename) => {
+    cb(null, uuidv4() + path.extname(file.originalname))
+  }
+})
+app.use(multer({storage : storage}).single('image'))
 app.use(session({
   secret: 'lebnympam',
   resave: false,
@@ -43,10 +54,10 @@ app.use((req,res,next)=>{
 })
 app.use('/', indexRouter);
 app.use('/home', homeRouter);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+  
 });
 
 // error handler

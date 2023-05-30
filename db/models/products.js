@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 var uniqueValidator = require('mongoose-unique-validator');
+const { stringify } = require("uuid");
 
 
 const productSchema = new Schema({
@@ -14,6 +15,12 @@ const productSchema = new Schema({
     description: String,
     quantity:Number,
     price:Number,
+    image: {
+      originalname:String,
+      mimetype:String,
+      filename:String,
+      size:Number
+    }
 })
 
 productSchema.plugin(uniqueValidator);

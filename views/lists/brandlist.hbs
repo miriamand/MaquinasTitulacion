@@ -8,19 +8,13 @@
                 <h6>Manage your Brand</h6>
             </div>
             <div class="page-btn">
-                <a href="/home/addbrand" class="btn btn-added"><img src="/img/icons/plus.svg" class="me-2" alt="img">Add Brand</a>
+                <a href="/home/addbrand" class="btn btn-added"><img src="/img/icons/plus.svg" class="me-2" alt="img">Añadir Marca</a>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <div class="table-top">
                     <div class="search-set">
-                        <div class="search-path">
-                            <a class="btn btn-filter" id="filter_search">
-                                <img src="/img/icons/filter.svg" alt="img">
-                                <span><img src="/img/icons/closes.svg" alt="img"></span>
-                            </a>
-                        </div>
                         <div class="search-input">
                             <a class="btn btn-searchset"><img src="/img/icons/search-white.svg" alt="img"></a>
                         </div>
@@ -44,12 +38,12 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Enter Brand Name">
+                                    <input type="text" placeholder="Introduce nombre" required>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Enter Brand Description">
+                                    <input type="text" placeholder="Introduce descripción" required>
                                 </div>
                             </div>
                             <div class="col-lg-1 col-sm-6 col-12 ms-auto">
@@ -71,9 +65,9 @@
                                     </label>
                                 </th>
                                 
-                                <th>Brand Name</th>
-                                <th>Brand Description</th>
-                                <th>Action</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,10 +82,10 @@
                                 <td>{{this.brand}}</td>
                                 <td>{{this.description}}</td>
                                 <td>
-                                    <a class="me-3" href="editbrand.html">
+                                    <a class="me-3" href="/home/editbrand/{{this.id}}">
                                         <img src="/img/icons/edit.svg" alt="img">
                                     </a>
-                                    <a class="me-3 confirm-text" href="javascript:void(0);">
+                                    <a class="me-3 confirm-text" href="/home/deletebrand/{{this.id}}" onclick="">
                                         <img src="/img/icons/delete.svg" alt="img">
                                     </a>
                                 </td>
