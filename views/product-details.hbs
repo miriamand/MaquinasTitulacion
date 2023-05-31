@@ -1,0 +1,65 @@
+{{>navbar}}
+{{>sidebar}}
+<div class="page-wrapper">
+<div class="content">
+<div class="page-header">
+<div class="page-title">
+<h4>Detalles del productos</h4>
+<h6>Todos los detalles</h6>
+</div>
+</div>
+
+<div class="row">
+<div class="col-lg-8 col-sm-12">
+<div class="card">
+<div class="card-body">
+<div class="productdetails">
+<ul class="product-bar">
+<li>
+<h4>Producto</h4>
+<h6>{{prods.product}}</h6>
+</li>
+<li>
+<h4>Categoria</h4>
+<h6>{{prods.category}}</h6>
+</li>
+<li>
+<h4>Marca</h4>
+<h6>{{prods.brand}}</h6>
+</li>
+<li>
+<h4>SKU</h4>
+<h6>{{prods.SKU}}</h6>
+</li>
+<li>
+<h4>Cantidad</h4>
+<h6>{{prods.quantity}}</h6>
+</li>
+<li>
+<h4>Precio</h4>
+<h6>{{prods.price}}</h6>
+</li>
+<li>
+<h4>Descripción</h4>
+<h6>{{prods.description}}</h6>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-4 col-sm-12">
+<div class="card">
+<div class="card-body">
+<img src="/img/uploads/{{prods.image.filename}}" alt="img">
+<h4>{{prods.product}}</h4>
+<h6>{{prods.image.size}} bits</h6>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>

@@ -85,9 +85,10 @@
                                     <a class="me-3" href="/home/editbrand/{{this.id}}">
                                         <img src="/img/icons/edit.svg" alt="img">
                                     </a>
-                                    <a class="me-3 confirm-text" href="/home/deletebrand/{{this.id}}" onclick="">
+                                    <a class="me-3 confirm-text" type="submit" onclick="deletebrand({{this.id}})">
                                         <img src="/img/icons/delete.svg" alt="img">
                                     </a>
+                                    </form>
                                 </td>
                             </tr>
                             {{/each}}

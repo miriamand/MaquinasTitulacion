@@ -70,7 +70,7 @@
   <a href="javascript:void(0);" class="product-img">
     <img src="/img/uploads/{{this.image.filename}}" alt="product">
   </a>
-  <a href="product-details.html">{{this.product}}</a>
+  <a href="/home/products-details/{{this.id}}">{{this.product}}</a>
 </td>
 
 
@@ -81,10 +81,10 @@
                                         <td>{{this.price}}</td>
                                         <td>{{this.quantity}}</td>
                                         <td>
-                                            <a class="me-3" href="product-details.html">
+                                            <a class="me-3" href="/home/products-details/{{this.id}}">
                                                 <img src="/img/icons/eye.svg" alt="img">
                                             </a>
-                                            <a class="me-3" href="/home/editproduct">
+                                            <a class="me-3" href="/home/editproduct/{{this.id}}" >
                                                 <img src="/img/icons/edit.svg" alt="img">
                                             </a>
                                             <a class="confirm-text" href="javascript:void(0);">

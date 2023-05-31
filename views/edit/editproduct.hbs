@@ -1,0 +1,116 @@
+
+{{>navbar}} 
+{{>sidebar}}
+
+<div class="page-wrapper">
+    <div class="content">
+    <div class="page-header">
+    <div class="page-title">
+    <h4>Editar Producto</h4>
+    <h6>Actualiza el producto</h6>
+            </div>
+            {{#if failureMessage}}
+            <div class="alert alert-danger">{{failureMessage}}</div>
+            {{/if}} {{#if successMessage}}
+            <div class="alert alert-success">{{successMessage}}</div>
+            {{/if}}
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <form action="/home/editproduct/{{prods.id}}" method="post" enctype="multipart/form-data" >
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" name="product" value="{{prods.product}}" required  disabled/>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select class="select" name="category" required>
+                                    <option name="" value="" disabled selected> Escoge la categoria</option>
+                                    {{#each category}}
+                                    <option value="{{this.category}}">
+                                        {{this.category}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Marca</label>
+                                <select class="select" name="brand" required>
+                                    <option name="" value="" disabled selected> Escoge la marca</option>
+                                    {{#each brands}}
+                                    <option value="{{this.brand}}">
+                                        {{this.brand}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>SKU</label>
+                                <input name="SKU" type="text" value="{{prods.SKU}}" required/>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Descripción</label>
+                                <textarea
+                                    class="form-control"
+                                    name="description"
+                                    value="{{prods.description}}"
+                                    required
+                                >{{prods.description}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Cantidad</label>
+                                <input type="text" name="quantity" value="{{prods.quantity}}" required />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Precio</label>
+                                <input type="text" name="price" value="{{prods.price}}" required />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label> Product Image</label>
+                                <div class="image-upload">
+                                    <input type="file" name="image" required>
+                                    <div class="image-uploads">
+                                        <img
+                                            src="/img/icons/upload.svg"
+                                            alt="img"
+                                        />
+                                        <h4>Drag and drop a file to upload</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <button
+                                href="javascript:void(0);"
+                                class="btn btn-submit me-2"
+                                type="submit"
+                            >
+                                Guardar
+                            </button>
+                            <a href="/home/productlist" class="btn btn-cancel">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

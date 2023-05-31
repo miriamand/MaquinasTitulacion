@@ -6,30 +6,6 @@ const Product = require("../db/models/products")
 const Swal = require('sweetalert2')
 const fs = require('fs')
 
-  //     title: "Estas seguro?",
-  //     text: "You won't be able to revert this!",
-  //     type: "warning",
-  //     showCancelButton: !0,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, delete it!",
-  //     confirmButtonClass: "btn btn-primary",
-  //     cancelButtonClass: "btn btn-danger ml-1",
-  //     buttonsStyling: !1,
-  // }).then(async(result) => {
-  //     result.value &&
-  //     await Brands.findByIdAndRemove(req.params.id) 
-  //     if (error) {
-  //       console.error('Error deleting document:', error);
-  //       swal.fire('Error', 'Failed to delete the document', 'error');
-  //     } else {
-  //       console.log('Document deleted successfully');
-  //       swal.fire('Deleted!', 'The document has been deleted.', 'success');
-  //     }
-
-
-
-
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -53,7 +29,7 @@ router.post('/addbrand', isAuthenticated, function(req, res, next) {
     });
 });
 
-router.post('/updatebrand/:id', isAuthenticated, function(req, res, next) {
+router.post('/editbrand/:id', isAuthenticated, function(req, res, next) {
   console.log(req.body)
   let data = req.body
   Brands.findByIdAndUpdate(req.params.id, data)
@@ -67,33 +43,36 @@ router.post('/updatebrand/:id', isAuthenticated, function(req, res, next) {
     });
 });
 
-router.get('/deletebrand/:id', async function(req, res, next) {
- 
-    Swal.fire({
-      title: "Estas seguro?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-      confirmButtonClass: "btn btn-primary",
-      cancelButtonClass: "btn btn-danger ml-1",
-      buttonsStyling: false,
-    }).then(async (result) => {
-      if (result.value) {
-        const deletedItem = await Brands.findByIdAndRemove(req.params.id);
-        if (!deletedItem) {
-          console.error("Item not found");
-          Swal.fire("Error", "Failed to delete the document", "error");
-        } else {
-          console.log("Document deleted successfully");
-          Swal.fire("Deleted!", "The document has been deleted.", "success");
-        }
-      }
-    });
+// router.post('/deletebrand/:id', async(req, res, next) => {
+  
+// })
 
+router.delete('/home/deletebrands/:id', async (req, res, next) => {
+  try {
+    const itemId = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(itemId)) {
+      return res.status(400).json({ error: 'Invalid itemId' });
+    }
+
+    // Delete the item with the given ID using Mongoose or your preferred method
+    const deletedBrand = await Brands.findByIdAndRemove(itemId);
+
+    if (!deletedBrand) {
+      return res.status(404).json({ error: 'Brand not found' });
+    }
+
+    res.sendStatus(200); // Send a success status code
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500); // Send an error status code
+  }
 });
+
+
+  
+
+
   
 
 router.post('/addcategory', isAuthenticated, function(req, res, next) {
@@ -163,7 +142,7 @@ router.post('/addproduct', function(req, res, next) {
     });
 });
 
-router.post('/updateproduct/:id', isAuthenticated, function(req, res, next) {
+router.post('/editproduct/:id', isAuthenticated, function(req, res, next) {
   console.log(req.body)
   let data = req.body
   Product.findByIdAndUpdate(req.params.id, data)
@@ -193,12 +172,35 @@ router.post('/deleteproduct/:id', isAuthenticated, function(req, res, next) {
 router.get('/addbrand', isAuthenticated, (req, res) => {
   res.render('./adds/addbrand');
 });
+router.get('/editbrand/:id', async(req, res) => {
+  try {
+    let registros = await Brands.find({ _id: req.params.id }).exec();
+    res.render('./edit/editbrand', { brands: registros[0] });
+    console.log(registros); // puede tener registros o un array vacío
+  } catch (e) {
+    console.error(e);
+  } 
+});
+router.get('/editproduct/:id', async(req, res) => {
+  try {
+    let registros = await Product.find({ _id: req.params.id }).exec();
+    let registroC = await Category.find().exec();
+    let registroB = await Brands.find().exec();
+
+
+    res.render('./edit/editproduct', { prods: registros[0], category: registroC, brands: registroB });
+    console.log(registros); 
+  } catch (e) {
+    console.error(e);
+  } 
+});
+
 
 router.get('/brandlist', async(req, res) => {
   try {
     let registros = await Brands.find().exec();
     res.render("./lists/brandlist", { brands: registros })
-    console.log(registros); // puede tener registros o un array vacío
+    console.log(registros); 
   } catch (e) {
     console.error(e);
   }
@@ -223,9 +225,15 @@ router.get('/productlist', async(req, res) => {
   }
 });
 
-router.get('/product/:id'), async(req, res) => {
-  res.send("Product Details")
-}
+router.get('/products-details/:id', async(req, res) => {
+  try {
+    let registros = await Product.find({ _id: req.params.id }).exec();
+    res.render('product-details', { prods: registros[0]});
+    console.log(registros); 
+  } catch (e) {
+    console.error(e);
+  } 
+});
 router.get('/addcategory', isAuthenticated, (req, res) => {
   res.render('./adds/addcategory');
 });
